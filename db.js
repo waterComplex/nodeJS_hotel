@@ -15,7 +15,7 @@ mongoose.connect(mongoURL, {
     useUnifiedTopology: true,
     ssl: true,
     sslValidate: true,
-    sslCA: fs.readFileSync('<path_to_CA_certificate>'),
+    // sslCA: fs.readFileSync('<path_to_CA_certificate>'),
 })
 
 // Get the default connection
