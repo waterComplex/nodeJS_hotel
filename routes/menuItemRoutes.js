@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const MenuItem = require('./../models/MenuItem');
+const MenuItem = require('./../models/MenuItem.js').default;
 
 router.post('/', async (req, res) => {
     try {
         const data = req.body; // assuming we are getting the data (request body contains the data)
         // create a new Person document using the mongoose model
-    
+
         const newMenuItem = new MenuItem(data);
 
         // save the newPerson to the database
@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
         res.status(200).json(response);
     } catch (error) {
         console.log(error);
-        res.status(500).json({error: "Internal server error"});
+        res.status(500).json({ error: "Internal server error" });
     }
 })
 
@@ -27,7 +27,7 @@ router.get("/", async (req, res) => {
         res.status(200).json(data);
     } catch (error) {
         console.log(error);
-        res.status(500).json({error: "Internal server error"});
+        res.status(500).json({ error: "Internal server error" });
     }
 })
 
@@ -35,15 +35,15 @@ router.get('/:taste', async (req, res) => {
     try {
         const tasteType = req.params.taste;
         if (tasteType == 'spicy' || tasteType == 'salty' || tasteType == 'sweet' || tasteType == 'bitter' || tasteType == 'sour') {
-            const response = await MenuItem.find({taste: tasteType});
+            const response = await MenuItem.find({ taste: tasteType });
             console.log('response fetched successfully');
             res.status(200).json(response);
         } else {
-            res.status(404).json({error: "Invalid taste type"});
+            res.status(404).json({ error: "Invalid taste type" });
         }
     } catch (error) {
         console.log(error);
-        res.status(500).json({error: "Internal server error"});
+        res.status(500).json({ error: "Internal server error" });
     }
 })
 
@@ -59,14 +59,14 @@ router.put('/:id', async (req, res) => {
 
         if (!response) {
             // when id is not found
-            return res.status(404).json({error: "menu item not found"});
+            return res.status(404).json({ error: "menu item not found" });
         }
 
         console.log('menu item updated successfully');
         res.status(200).json(response);
     } catch (error) {
         console.log(error);
-        res.status(500).json({error: "Internal server error"});
+        res.status(500).json({ error: "Internal server error" });
     }
 })
 
@@ -78,14 +78,14 @@ router.delete('/:id', async (req, res) => {
         const response = await MenuItem.findByIdAndDelete(menuItemId);
         if (!response) {
             // when id is not found
-            return res.status(404).json({error: "menuItem not found"});
+            return res.status(404).json({ error: "menuItem not found" });
         }
         console.log('menuItem deleted successfully');
-        res.status(200).json({message: "menuItem deleted successfully"});
+        res.status(200).json({ message: "menuItem deleted successfully" });
     } catch (error) {
         console.log(error);
-        res.status(500).json({error: "Internal server error"});
+        res.status(500).json({ error: "Internal server error" });
     }
 })
 // comment
-module.exports = router ;
+module.exports = router;
