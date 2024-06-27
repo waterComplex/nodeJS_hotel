@@ -13,8 +13,8 @@ const mongoURL = process.env.MONGODB_URL
 mongoose.connect(mongoURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    ssl: true,
-    sslValidate: true,
+    // ssl: true,
+    // sslValidate: true,
     // sslCA: fs.readFileSync('<path_to_CA_certificate>'),
 })
 
